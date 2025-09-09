@@ -9,7 +9,7 @@
 
 <section>
 	<div class="hms-container">
-		<div class="w-full">
+		<div class="w-full my-16">
 			{#if weatherData}
 				<WeatherCard weather={weatherData} />
 			{:else}

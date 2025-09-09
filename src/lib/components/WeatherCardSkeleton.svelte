@@ -1,4 +1,4 @@
-<div class="my-6 mt-16 w-full bg-base-200 p-6 shadow-xl">
+<div class=" w-full bg-base-200 p-6 shadow-xl">
 	<div class="mb-4 flex items-center justify-between">
 		<div class="h-[52px] skeleton  w-full max-w-[180px] ">
 			

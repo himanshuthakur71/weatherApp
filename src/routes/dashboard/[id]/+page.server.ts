@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ params, locals: { user, supabase } 
 
 
     return {
-        weathers: await getUserWeather()
+        weather: await getUserWeather()
     }
 
 
