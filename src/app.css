@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+@plugin "daisyui" {
+    themes: bumblebee --default, halloween;
+}
+
+
+.hms-container{
+    @apply w-full max-w-[1210px] px-[20px] mx-auto;
+}
