@@ -30,7 +30,7 @@
 							class="dropdown-content menu z-1 mt-3 w-52 menu-lg rounded-box bg-base-100 p-2 shadow"
 						>
 							<li>
-								<a href="/profile" class="justify-between"> Profile </a>
+								<a href="/dashboard/profile" class="justify-between"> Profile </a>
 							</li>
 
 							<li><a href="/logout" class=" bg-error text-error-content">Logout</a></li>
