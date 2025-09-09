@@ -9,10 +9,10 @@
 	let type = $derived(show_password ? 'text' : 'password');
 </script>
 
-<section class="w-full h-full">
-	<div class="hms-container h-full">
-		<div class="w-full h-full flex justify-center items-center py-8">
-			<section class="h-auto w-full max-w-md">
+
+
+
+<section class="h-auto w-full max-w-md">
 				<div class=" mb-8 text-center">
 					<h1 class="text-2xl font-bold">Welcome Back</h1>
 					<p class="mt-1 text-gray-400">Enter your email and password to continue.</p>
@@ -140,6 +140,3 @@
 					</p>
 				</div>
 			</section>
-		</div>
-	</div>
-</section>

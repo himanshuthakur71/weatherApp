@@ -1,0 +1,144 @@
+<script lang="ts">
+	import { enhance } from '$app/forms';
+	import { fade, fly } from 'svelte/transition';
+
+	let { form }: { form: any } = $props();
+	let loading = $state(false);
+
+	let show_password = $state(false);
+	let type = $derived(show_password ? 'text' : 'password');
+</script>
+
+<section class="h-auto w-full max-w-md">
+	<div class=" mb-8 text-center">
+		<h1 class="text-2xl font-bold">Create Your Account</h1>
+		<p class="mt-1 text-gray-400">Sign up to access comprehensive features</p>
+	</div>
+
+	<div class="mx-auto w-full max-w-md">
+		<form
+			method="POST"
+			use:enhance={() => {
+				if (form?.error) {
+					form.error = '';
+				}
+
+				loading = true;
+				return async ({ update }) => {
+					await update();
+					loading = false;
+				};
+			}}
+			action="?/register"
+		>
+			<div class="grid w-full grid-cols-1 gap-4">
+				<div class="grid w-full grid-cols-2 gap-4">
+					<label class="floating-label">
+						<span>First name</span>
+						<input type="text" placeholder="Himanshu" name="first_name" class="input w-full" />
+					</label>
+
+					<label class="floating-label">
+						<span>Last name</span>
+						<input type="text" placeholder="Thakur" name="last_name" class="input w-full" />
+					</label>
+				</div>
+				<label class="floating-label">
+					<span>Email</span>
+					<input type="email" placeholder="himanshu@thakur.com" name="email" class="input w-full" />
+				</label>
+
+				<div class="grid w-full grid-cols-2 gap-4">
+					<label class="floating-label">
+						<span>Password</span>
+						<input {type} placeholder="••••••" name="password" class="input w-full" />
+					</label>
+
+					<label class="floating-label relative">
+						<span>Confirm Password</span>
+						<input {type} placeholder="••••••" name="confirm_password" class="input w-full" />
+
+						<button
+							type="button"
+							class="absolute top-[10px] right-[10px] z-10 cursor-pointer"
+							onclick={() => (show_password = !show_password)}
+						>
+							{#if show_password}
+								<!-- Hidden Eye (shown when password is visible) -->
+								<svg
+									class="h-5 w-5 fill-[#d7d7d7] transition-colors hover:fill-[#aaaaaa]"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 18 16"
+								>
+									<path
+										d="M 7.505 3.667 C 7.967 3.482 8.47 3.368 8.998 3.368 C 11.256 3.368 13.088 5.254 13.088 7.578 C 13.088 8.122 12.982 8.64 12.798 9.116 L 15.19 11.579 C 16.425 10.518 17.399 9.145 18 7.578 C 16.581 3.882 13.092 1.263 8.998 1.263 C 7.853 1.263 6.757 1.474 5.738 1.853 L 7.505 3.667 Z M 1.861 0 L 0.818 1.074 L 2.683 2.994 L 3.055 3.377 C 1.706 4.463 0.638 5.907 0 7.578 C 1.415 11.276 4.908 13.895 8.998 13.895 C 10.266 13.895 11.476 13.642 12.585 13.183 L 12.933 13.541 L 15.317 16 L 16.36 14.931 L 1.861 0 Z M 4.908 7.578 C 4.908 6.914 5.072 6.291 5.342 5.726 L 6.606 7.027 C 6.569 7.208 6.544 7.389 6.544 7.578 C 6.544 8.973 7.644 10.105 8.998 10.105 C 9.182 10.105 9.358 10.08 9.53 10.042 L 10.794 11.343 C 10.25 11.621 9.645 11.789 8.998 11.789 C 6.74 11.789 4.908 9.903 4.908 7.578 Z M 8.998 5.053 L 8.863 5.065 L 11.44 7.718 L 11.452 7.578 C 11.452 6.185 10.352 5.053 8.998 5.053 Z"
+										fill-rule="nonzero"
+									/>
+								</svg>
+							{:else}
+								<!-- Visible Eye (shown when password is hidden) -->
+								<svg
+									class="h-5 w-5 fill-[#d7d7d7] transition-colors hover:fill-[#aaaaaa]"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 14"
+								>
+									<path
+										d="M 20 7 C 18.4 2.9 14.5 0 10 0 C 5.5 0 1.6 2.9 0 7 C 1.6 11.1 5.5 14 10 14 C 14.5 14 18.4 11.1 20 7 Z M 14.5 7 C 14.5 9.6 12.5 11.7 10 11.7 C 7.5 11.7 5.5 9.6 5.5 7 C 5.5 4.4 7.5 2.3 10 2.3 C 12.5 2.3 14.5 4.4 14.5 7 Z M 12.7 7 C 12.7 5.5 11.5 4.2 10 4.2 C 8.5 4.2 7.3 5.5 7.3 7 C 7.3 8.5 8.5 9.8 10 9.8 C 11.5 9.8 12.7 8.5 12.7 7 Z"
+										fill-rule="nonzero"
+									/>
+								</svg>
+							{/if}
+						</button>
+					</label>
+				</div>
+
+				{#if form?.error}
+					<div role="alert" class="alert-soft alert alert-error">
+						<span>{form?.error}.</span>
+					</div>
+				{/if}
+
+				<button type="submit" disabled={loading} class=" btn btn-primary">
+					{#if loading}
+						<span class="loading loading-spinner"></span>
+					{:else}
+						Sign Up
+					{/if}
+				</button>
+			</div>
+		</form>
+
+		<div class="divider my-6 text-gray-400">Or continue with</div>
+
+		<form action="" class="grid">
+			<button type="submit" class="btn border-[#e5e5e5] bg-white text-black">
+				<svg
+					aria-label="Google logo"
+					width="16"
+					height="16"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 512 512"
+					><g
+						><path d="m0 0H512V512H0" fill="#fff"></path><path
+							fill="#34a853"
+							d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+						></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+						></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+						></path><path
+							fill="#ea4335"
+							d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+						></path></g
+					></svg
+				>
+				Continue with Google
+			</button>
+		</form>
+
+		<p class=" mt-6 text-center text-gray-400">
+			Already have an account? <a
+				href="/auth/login"
+				class=" font-bold text-base-content hover:underline">Sign in</a
+			>
+		</p>
+	</div>
+</section>

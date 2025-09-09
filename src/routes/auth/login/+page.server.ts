@@ -2,7 +2,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 export const actions: Actions = {
-    login: async ({ request, cookies }) => {
+    login: async ({ request }) => {
         const formData = await request.formData();
         const email = formData.get("email")?.toString().trim();
         const password = formData.get("password")?.toString();
@@ -12,9 +12,5 @@ export const actions: Actions = {
             return fail(400, { error: "Email and password are required" });
         }
 
-
-
-
-        return fail(500, { error: "Unexpected login error" });
     }
 };
