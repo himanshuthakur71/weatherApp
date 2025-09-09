@@ -24,7 +24,7 @@
 			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
 		</div>
-		<div class="absolute top-[-140px] right-[-100px] text-[160px]">
+		<div class="absolute top-[-40px]  right-[-30px] lg:top-[-140px] lg:right-[-100px] text-[60px] md:text-[160px]">
 			{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}
 		</div>
 	</div>

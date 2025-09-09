@@ -1,4 +1,4 @@
-<footer class="w-full">
+<footer class="w-full mt-32">
 	<div class="hms-container">
 		<div class="footer w-full items-center sm:footer-horizontal">
 			<aside class="grid-flow-col items-center">

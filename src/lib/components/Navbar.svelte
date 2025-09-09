@@ -25,7 +25,7 @@
 
 			<div class="navbar-end gap-4">
 				{#if theme == 'halloween'}
-					<div class=" relative" transition:fly={{ y: -200, duration: 1000 }}>
+					<div class=" relative hidden" transition:fly={{ y: -200, duration: 1000 }}>
 						<figure
 							class=" absolute top-[-50px] right-[0px] z-[-1] flex h-[112px] w-[168px] rotate-[342deg] items-center justify-center"
 						>
@@ -39,7 +39,7 @@
 						</figure>
 					</div>
 				{/if}
-				<p class="w-[76px] text-sm font-semibold"><CurrentTime /></p>
+				<p class="w-[80px] md:w-[76px] text-sm font-semibold"><CurrentTime /></p>
 				{#if user?.id}
 					<div class="dropdown dropdown-end">
 						<div tabindex="0" role="button" class="btn avatar btn-circle btn-ghost">

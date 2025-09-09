@@ -62,7 +62,7 @@
 			});
 
 			invalidate('supabase:auth');
-			alert('Upload complete!');
+			// alert('Upload complete!');
 		} catch (e) {
 			console.error(e);
 			alert('Upload failed');
@@ -92,7 +92,7 @@
 			try {
 				await deleteAvatar(avatarUrl, userId, supabase);
 				invalidate('supabase:auth');
-				alert('Avatar deleted');
+				// alert('Avatar deleted');
 			} catch (e) {
 				console.error(e);
 				alert('Failed to delete avatar');
