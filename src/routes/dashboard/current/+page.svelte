@@ -1,5 +1,6 @@
 <script lang="ts">
 	import WeatherCard from '$lib/components/WeatherCard.svelte';
+	import WeatherCardSkeleton from '$lib/components/WeatherCardSkeleton.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -12,9 +13,7 @@
 			{#if weatherData}
 				<WeatherCard weather={weatherData} />
 			{:else}
-				<div class="flex items-center justify-center pt-16">
-					<span class="loading size-60 loading-ring"></span>
-				</div>
+				<WeatherCardSkeleton />
 			{/if}
 		</div>
 	</div>

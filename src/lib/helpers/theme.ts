@@ -10,6 +10,7 @@ export function initTheme() {
 		if (!theme) {
 			const hour = new Date().getHours();
 			theme = hour >= 6 && hour < 18 ? "bumblebee" : "halloween";
+			// theme = hour >= 6 && hour < 18 ? "halloween" : "bumblebee";
 		}
 
 		document.documentElement.setAttribute("data-theme", theme);

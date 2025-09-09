@@ -18,12 +18,12 @@
 </script>
 
 <div class="my-6 mt-16 w-full bg-base-200 p-6 shadow-xl">
-	<div class="mb-4 flex items-center justify-between">
+	<div class="mb-4 flex items-center justify-between relative">
 		<div>
 			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
 		</div>
-		<div class="text-5xl">{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}</div>
+		<div class="text-[160px] absolute right-[-100px]  top-[-140px]">{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}</div>
 	</div>
 
 	<div class="mb-4">
@@ -68,8 +68,4 @@
 	</div>
 </div>
 
-<style>
-	.card p {
-		line-height: 1.2;
-	}
-</style>
+
