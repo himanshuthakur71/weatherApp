@@ -1,22 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import CurrentTime from './CurrentTime.svelte';
 	import moon from '$lib/assets/moon-bg.png';
 
-	const { user, supabase } = $derived(page.data);
+	const { user } = $derived(page.data);
 
 	// console.log(user)
-
-	const logout = async () => {
-		const { error } = await supabase.auth.signOut();
-
-		if (error) {
-			console.error(error);
-		} else {
-			goto('/');
-		}
-	};
 </script>
 
 <header class="relative w-full">
@@ -61,9 +50,7 @@
 							</li>
 
 							<li>
-								<button type="button" onclick={logout} class=" bg-error text-error-content"
-									>Logout</button
-								>
+								<a href="/logout" class=" bg-error text-error-content"> Logout </a>
 							</li>
 						</ul>
 					</div>

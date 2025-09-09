@@ -3,6 +3,21 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Instant theme (before hydration) -->
+		<script>
+			(function () {
+				let theme =
+					localStorage.getItem("theme") ||
+					sessionStorage.getItem("theme");
+
+				if (!theme) {
+					const hour = new Date().getHours();
+					theme = hour >= 6 && hour < 18 ? "bumblebee" : "halloween";
+				}
+
+				document.documentElement.setAttribute("data-theme", theme);
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

@@ -1,23 +1,23 @@
 import { browser } from "$app/environment";
 
 export function initTheme() {
-    if (!browser) return; // Only run in browser
+	if (!browser) return;
 
-    const setTheme = () => {
-        const now = new Date();
-        const hour = now.getHours();
+	const setTheme = () => {
+		let theme = localStorage.getItem("theme");
 
-        if (hour >= 6 && hour < 18) {
-            document.documentElement.setAttribute("data-theme", "bumblebee");
-        } else {
-            document.documentElement.setAttribute("data-theme", "halloween");
-        }
-    };
+		// Auto-select if no saved theme
+		if (!theme) {
+			const hour = new Date().getHours();
+			theme = hour >= 6 && hour < 18 ? "bumblebee" : "halloween";
+		}
 
-    setTheme(); // Initial theme
+		document.documentElement.setAttribute("data-theme", theme);
+		sessionStorage.setItem("theme", theme); // for faster refresh
+	};
 
-    // Optional: update every minute to handle transitions automatically
-    const interval = setInterval(setTheme, 60 * 1000);
+	setTheme();
 
-    return () => clearInterval(interval); // Return cleanup function
+	const interval = setInterval(setTheme, 60 * 1000);
+	return () => clearInterval(interval);
 }
