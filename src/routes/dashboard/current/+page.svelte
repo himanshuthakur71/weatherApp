@@ -9,15 +9,12 @@
 <section>
 	<div class="hms-container">
 		<div class="w-full">
-			<!-- <pre
-				class="h-full max-h-[512px] w-full overflow-auto bg-black p-4 text-[12px] text-white">{JSON.stringify(
-					weatherData,
-					null,
-					2
-				)}</pre> -->
-
 			{#if weatherData}
 				<WeatherCard weather={weatherData} />
+			{:else}
+				<div class="flex items-center justify-center pt-16">
+					<span class="loading size-60 loading-ring"></span>
+				</div>
 			{/if}
 		</div>
 	</div>
