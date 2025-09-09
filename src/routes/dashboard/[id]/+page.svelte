@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import WeatherCard from '$lib/components/WeatherCard.svelte';
 	import DeleteReport from '$lib/modals/DeleteReport.svelte';
+	import SendEmail from '$lib/modals/SendEmail.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -14,6 +15,12 @@
 
 	const closeDeleteModal = () => {
 		deleteModal = false;
+	};
+
+	let emailModal = $state(false);
+
+	const closeEmailModal = () => {
+		emailModal = false;
 	};
 </script>
 
@@ -52,7 +59,12 @@
 					>
 				</button>
 
-				<button aria-label="email" type="button" class="btn btn-circle btn-sm btn-secondary">
+				<button
+					aria-label="email"
+					type="button"
+					class="btn btn-circle btn-sm btn-secondary"
+					onclick={() => (emailModal = true)}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						height="24px"
@@ -77,4 +89,8 @@
 
 {#if deleteModal}
 	<DeleteReport id={weather.id} onClose={closeDeleteModal} />
+{/if}
+
+{#if emailModal}
+	<SendEmail {weather} onClose={closeEmailModal} />
 {/if}
