@@ -1,6 +1,4 @@
 <script lang="ts">
-
-
 	let { weather } = $props();
 
 	// Convert UNIX timestamp to local time string
@@ -17,11 +15,9 @@
 		if (main.includes('Storm')) return '⛈️';
 		return '🌤️';
 	};
-
-	
 </script>
 
-<div class="card mx-auto my-6 max-w-md bg-base-200 p-6 shadow-xl">
+<div class="my-6 mt-16 w-full bg-base-200 p-6 shadow-xl">
 	<div class="mb-4 flex items-center justify-between">
 		<div>
 			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
@@ -36,36 +32,36 @@
 		<p class="capitalize">{weather.weather[0].description}</p>
 	</div>
 
-	<div class="grid grid-cols-2 gap-4">
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+	<div class=" flex flex-wrap gap-4">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Sunrise</p>
 			<p>{formatTime(weather.sys.sunrise)}</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Sunset</p>
 			<p>{formatTime(weather.sys.sunset)}</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Wind</p>
 			<p>{weather.wind.speed} m/s, {weather.wind.deg}°</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Humidity</p>
 			<p>{weather.main.humidity}%</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Pressure</p>
 			<p>{weather.main.pressure} hPa</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Visibility</p>
 			<p>{weather.visibility / 1000} km</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Clouds</p>
 			<p>{weather.clouds.all}%</p>
 		</div>
-		<div class="rounded-lg bg-base-100 p-2 shadow-sm">
+		<div class="w-full max-w-[180px] rounded-lg bg-base-100 p-2 shadow-sm">
 			<p class="font-semibold">Temperature Range</p>
 			<p>{weather.main.temp_min}°C - {weather.main.temp_max}°C</p>
 		</div>
