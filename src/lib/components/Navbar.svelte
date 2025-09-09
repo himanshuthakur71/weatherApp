@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import CurrentTime from './CurrentTime.svelte';
+	import moon from '$lib/assets/moon-bg.png';
 
 	const { user, supabase } = $derived(page.data);
 
@@ -18,7 +19,7 @@
 	};
 </script>
 
-<header class="w-full">
+<header class="relative w-full">
 	<div class="hms-container">
 		<div class="navbar">
 			<div class="navbar-start">
@@ -26,7 +27,20 @@
 			</div>
 
 			<div class="navbar-end gap-4">
-				<p class="text-sm font-semibold"><CurrentTime /></p>
+				<div class=" relative">
+					<figure
+						class=" absolute top-[-50px] right-[0px] z-[-1] flex h-[112px] w-[168px] rotate-[342deg] items-center justify-center"
+					>
+						<img
+							src={moon}
+							alt="moon"
+							width="168"
+							height="112"
+							class="floating-animation h-full w-full"
+						/>
+					</figure>
+				</div>
+				<p class="w-[76px] text-sm font-semibold"><CurrentTime /></p>
 				{#if user?.id}
 					<div class="dropdown dropdown-end">
 						<div tabindex="0" role="button" class="btn avatar btn-circle btn-ghost">

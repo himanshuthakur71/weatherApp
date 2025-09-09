@@ -19,7 +19,7 @@
 			<figure class=" flex w-full max-w-[470px] items-center justify-center">
 				<img
 					src={weatherApp}
-					alt="AI Resume builder"
+					alt="weatherApp"
 					width="470"
 					height="345"
 					class="floating-animation h-full w-full"
