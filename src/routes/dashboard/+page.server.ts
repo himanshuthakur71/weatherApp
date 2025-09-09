@@ -2,8 +2,9 @@ import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
 
-export const load: PageServerLoad = async ({ fetch, locals: { supabase } }) => {
+export const load: PageServerLoad = async ({ depends, locals: { supabase } }) => {
 
+    depends('dashboard:now')
 
     // Fatch user weathers 
     const getUserWeathers = async () => {

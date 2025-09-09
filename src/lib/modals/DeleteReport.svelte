@@ -1,16 +1,25 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
+	import { invalidate } from '$app/navigation';
+	import { page } from '$app/state';
+	import { fade } from 'svelte/transition';
 
-    let { onClose }: { onClose: any } = $props();
+	let { id, onClose }: { id: string , onClose: any } = $props();
+
+	const { supabase } = $derived(page.data);
+
+	const deleteReport = async () => {
+		const { error: err } = await supabase.from('weathers').delete().eq('id', id);
+
+		if (!err) await invalidate('dashboard:now').then(() => onClose());
+	};
 </script>
-
 
 <dialog class="modal-open modal">
 	<div class="modal-box p-0" transition:fade>
 		<div class=" flex justify-between bg-error px-4 py-2 text-error-content">
 			<h3 class="text-lg font-bold">Delete Weather Report</h3>
 
-			<button onclick="{onClose}" aria-label="close" type="button" class="btn btn-circle btn-sm">
+			<button onclick={onClose} aria-label="close" type="button" class="btn btn-circle btn-sm">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -46,8 +55,10 @@
 			<h3 class=" mb-1 text-center text-2xl font-bold">Delete Report</h3>
 			<p class=" text-center text-lg">You're going to delete your weather report. Are you sure?</p>
 			<div class="mt-4 flex w-full justify-center gap-4">
-				<button onclick="{onClose}" type="button" class=" btn rounded-full btn-soft btn-primary lg:btn-lg"
-					>No, Keep it.</button
+				<button
+					onclick={onClose}
+					type="button"
+					class=" btn rounded-full btn-soft btn-primary lg:btn-lg">No, Keep it.</button
 				>
 				<button type="button" class="btn rounded-full btn-error lg:btn-lg">Yes, Delete It!</button>
 			</div>

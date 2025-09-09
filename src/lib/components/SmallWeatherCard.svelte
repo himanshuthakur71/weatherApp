@@ -88,5 +88,5 @@
 </div>
 
 {#if deleteModal}
-	<DeleteReport onClose={closeDeleteModal} />
+	<DeleteReport id={weather.id} onClose={closeDeleteModal} />
 {/if}
