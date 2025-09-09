@@ -1,16 +1,22 @@
 <script lang="ts">
-	import { invalidate } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 
-	let { id, onClose }: { id: string , onClose: any } = $props();
+	let { id, onClose }: { id: string; onClose: any } = $props();
 
 	const { supabase } = $derived(page.data);
 
 	const deleteReport = async () => {
 		const { error: err } = await supabase.from('weathers').delete().eq('id', id);
 
-		if (!err) await invalidate('dashboard:now').then(() => onClose());
+		if (!err) {
+			if (page.route.id == '/dashboard/[id]') {
+				goto('/dashboard');
+			} else {
+				await invalidate('dashboard:now').then(() => onClose());
+			}
+		}
 	};
 </script>
 
@@ -60,7 +66,9 @@
 					type="button"
 					class=" btn rounded-full btn-soft btn-primary lg:btn-lg">No, Keep it.</button
 				>
-				<button onclick="{deleteReport}" type="button" class="btn rounded-full btn-error lg:btn-lg">Yes, Delete It!</button>
+				<button onclick={deleteReport} type="button" class="btn rounded-full btn-error lg:btn-lg"
+					>Yes, Delete It!</button
+				>
 			</div>
 		</div>
 	</div>
