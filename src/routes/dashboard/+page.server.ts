@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ fetch, locals: { supabase } }) => {
             .from('weathers')
             .select('*')
 
-            return weathers
+            return weathers || []
     }
 
 
