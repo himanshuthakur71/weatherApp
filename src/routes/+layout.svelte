@@ -32,7 +32,7 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="grid h-full min-h-screen w-full grid-rows-[auto_1fr_auto]">
+<div class="grid h-full min-h-[105vh] w-full grid-rows-[auto_1fr_auto]">
 	<Navbar />
 	<main>
 		{@render children?.()}

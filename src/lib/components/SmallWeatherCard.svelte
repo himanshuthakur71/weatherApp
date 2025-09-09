@@ -1,4 +1,6 @@
 <script lang="ts">
+	import DeleteReport from '$lib/modals/DeleteReport.svelte';
+
 	let { weather }: { weather: any } = $props();
 
 	const getWeatherIcon = (main: string, sunset: number) => {
@@ -10,6 +12,14 @@
 		if (main.includes('Storm')) return '⛈️';
 		return '🌤️';
 	};
+
+	let deleteModal = $state(false);
+
+
+	const closeDeleteModal = () => {
+		deleteModal = false;
+	}
+
 </script>
 
 <div class=" w-full bg-base-200 p-4 shadow-xl">
@@ -35,7 +45,7 @@
 		</div>
 
 		<div class="flex gap-2">
-			<button aria-label="delete" type="button" class="btn btn-circle btn-sm btn-error">
+			<button aria-label="delete" type="button" class="btn btn-circle btn-sm btn-error" onclick="{() => deleteModal= true}">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -76,3 +86,7 @@
 		</div>
 	</div>
 </div>
+
+{#if deleteModal}
+	<DeleteReport onClose={closeDeleteModal} />
+{/if}
