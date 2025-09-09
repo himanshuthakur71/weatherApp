@@ -2,10 +2,18 @@
 	import { page } from '$app/state';
 	import CurrentTime from './CurrentTime.svelte';
 	import moon from '$lib/assets/moon-bg.png';
+	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 
 	const { user } = $derived(page.data);
 
 	// console.log(user)
+
+	let theme = $state('');
+
+	onMount(() => {
+		theme = document.documentElement.getAttribute('data-theme') || '';
+	});
 </script>
 
 <header class="relative w-full">
@@ -16,19 +24,21 @@
 			</div>
 
 			<div class="navbar-end gap-4">
-				<div class=" relative">
-					<figure
-						class=" absolute top-[-50px] right-[0px] z-[-1] flex h-[112px] w-[168px] rotate-[342deg] items-center justify-center"
-					>
-						<img
-							src={moon}
-							alt="moon"
-							width="168"
-							height="112"
-							class="floating-animation h-full w-full"
-						/>
-					</figure>
-				</div>
+				{#if theme == 'halloween'}
+					<div class=" relative" transition:fly={{y: -200, duration: 1000}}>
+						<figure
+							class=" absolute top-[-50px] right-[0px] z-[-1] flex h-[112px] w-[168px] rotate-[342deg] items-center justify-center"
+						>
+							<img
+								src={moon}
+								alt="moon"
+								width="168"
+								height="112"
+								class="floating-animation h-full w-full"
+							/>
+						</figure>
+					</div>
+				{/if}
 				<p class="w-[76px] text-sm font-semibold"><CurrentTime /></p>
 				{#if user?.id}
 					<div class="dropdown dropdown-end">
