@@ -37,7 +37,7 @@ export const actions: Actions = {
         if (error) {
             return fail(400, { error: error?.message || "Register failed" });
         } else {
-            redirect(303, '/dashboard')
+            redirect(303, '/dashboard/current')
         }
 
 
