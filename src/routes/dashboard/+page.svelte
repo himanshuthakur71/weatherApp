@@ -18,7 +18,7 @@
 						>{user?.user_metadata?.first_name} {user?.user_metadata?.last_name}</span
 					>
 				</h1>
-				<p class=" mt-2 text-lg">Track, download and email your weather history below.</p>
+				<p class=" mt-2 text-lg">Track, and email your weather history below.</p>
 			</div>
 
 			<div class="w-full">
