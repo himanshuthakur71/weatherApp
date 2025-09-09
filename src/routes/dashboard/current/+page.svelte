@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { weatherStore } from '$lib/stores/weather.svelte';
 	import { onMount } from 'svelte';
 
 	let loading = $state(true);
@@ -20,6 +21,21 @@
 			// console.log(resweatherDatadata)
 
 			if (weatherData?.name) {
+				// Clear existing attributes
+				weatherStore.attributes = [];
+
+				// Add current weather attributes
+				weatherStore.add({ key: 'city', value: weatherData.name });
+				weatherStore.add({ key: 'country', value: weatherData.sys.country });
+				weatherStore.add({ key: 'temp', value: weatherData.main.temp });
+				weatherStore.add({ key: 'feels_like', value: weatherData.main.feels_like });
+				weatherStore.add({ key: 'condition', value: weatherData.weather[0].main });
+				weatherStore.add({ key: 'description', value: weatherData.weather[0].description });
+				weatherStore.add({ key: 'icon', value: weatherData.weather[0].icon });
+				weatherStore.add({ key: 'sunrise', value: weatherData.sys.sunrise });
+				weatherStore.add({ key: 'sunset', value: weatherData.sys.sunset });
+
+				weatherStore.touch(); // refresh reactive store
 				// Fire background-like tasks (non-blocking)
 				queueMicrotask(async () => {});
 			}
@@ -45,15 +61,10 @@
 				<div class="mt-10 text-center text-red-500">{error}</div>
 			{:else}
 				<div class="w-full">
-					<!-- {#await weather}
-						<p>Loading...</p>
-					{:then w}
-						<h2 class="text-2xl font-bold">{w.city}, {w.country}</h2>
-						<div class="text-6xl">{getWeatherIcon(w.condition, w.icon, w.sunset)}</div>
-						<p class="text-xl">{w.description}</p>
-						<p class="text-lg">Temperature: {w.temp}°C (Feels like: {w.feels_like}°C)</p>
-						<p>🌅 Sunrise: {formatTime(w.sunrise)} | 🌇 Sunset: {formatTime(w.sunset)}</p>
-					{/await} -->
+					<h2>{weatherStore.get('city')}, {weatherStore.get('country')}</h2>
+					<p>Temp: {weatherStore.get('temp')}°C</p>
+					<p>Feels Like: {weatherStore.get('feels_like')}°C</p>
+					<p>Condition: {weatherStore.get('description')}</p>
 				</div>
 			{/if}
 		</div>
