@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DeleteReport from '$lib/modals/DeleteReport.svelte';
+	import SendEmail from '$lib/modals/SendEmail.svelte';
 
 	let { weather }: { weather: any } = $props();
 
@@ -15,11 +16,15 @@
 
 	let deleteModal = $state(false);
 
-
 	const closeDeleteModal = () => {
 		deleteModal = false;
-	}
+	};
 
+	let emailModal = $state(false);
+
+	const closeEmailModal = () => {
+		emailModal = false;
+	};
 </script>
 
 <div class=" w-full bg-base-200 p-4 shadow-xl">
@@ -45,7 +50,12 @@
 		</div>
 
 		<div class="flex gap-2">
-			<button aria-label="delete" type="button" class="btn btn-circle btn-sm btn-error" onclick="{() => deleteModal= true}">
+			<button
+				aria-label="delete"
+				type="button"
+				class="btn btn-circle btn-sm btn-error"
+				onclick={() => (deleteModal = true)}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -71,7 +81,12 @@
 				>
 			</button>
 
-			<button aria-label="email" type="button" class="btn btn-circle btn-sm btn-secondary">
+			<button
+				aria-label="email"
+				type="button"
+				class="btn btn-circle btn-sm btn-secondary"
+				onclick={() => (emailModal = true)}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -89,4 +104,8 @@
 
 {#if deleteModal}
 	<DeleteReport id={weather.id} onClose={closeDeleteModal} />
+{/if}
+
+{#if emailModal}
+	<SendEmail {weather} onClose={closeEmailModal} />
 {/if}
