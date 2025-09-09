@@ -1,10 +1,21 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import CurrentTime from './CurrentTime.svelte';
 
-	const { user } = $derived(page.data);
+	const { user, supabase } = $derived(page.data);
 
 	// console.log(user)
+
+	const logout = async () => {
+		const { error } = await supabase.auth.signOut();
+
+		if (error) {
+			console.error(error);
+		} else {
+			goto('/');
+		}
+	};
 </script>
 
 <header class="w-full">
@@ -35,7 +46,11 @@
 								<a href="/dashboard/profile" class="justify-between"> Profile </a>
 							</li>
 
-							<li><a href="/logout" class=" bg-error text-error-content">Logout</a></li>
+							<li>
+								<button type="button" onclick={logout} class=" bg-error text-error-content"
+									>Logout</button
+								>
+							</li>
 						</ul>
 					</div>
 				{:else}
