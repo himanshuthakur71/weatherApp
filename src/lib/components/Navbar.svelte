@@ -2,7 +2,7 @@
 	<div class="hms-container">
 		<div class="navbar">
 			<div class="navbar-start">
-				<a href="/" class="btn btn-ghost">WeatherApp</a>
+				<a href="/" class="btn btn-ghost text-lg">WeatherApp</a>
 			</div>
 
 			<div class="navbar-end">
