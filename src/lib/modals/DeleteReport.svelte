@@ -60,7 +60,7 @@
 					type="button"
 					class=" btn rounded-full btn-soft btn-primary lg:btn-lg">No, Keep it.</button
 				>
-				<button type="button" class="btn rounded-full btn-error lg:btn-lg">Yes, Delete It!</button>
+				<button onclick="{deleteReport}" type="button" class="btn rounded-full btn-error lg:btn-lg">Yes, Delete It!</button>
 			</div>
 		</div>
 	</div>
