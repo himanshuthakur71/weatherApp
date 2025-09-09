@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import WeatherCard from '$lib/components/WeatherCard.svelte';
+	import DeleteReport from '$lib/modals/DeleteReport.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -7,13 +9,24 @@
 	const { weather } = $derived(data);
 
 	// console.log(weather)
+
+	let deleteModal = $state(false);
+
+	const closeDeleteModal = () => {
+		deleteModal = false;
+	};
 </script>
 
 <section>
 	<div class="hms-container">
 		<div class="my-16 w-full">
 			<div class=" mb-6 flex gap-2">
-				<button aria-label="delete" type="button" class="btn btn-circle btn-sm btn-error">
+				<button
+					aria-label="delete"
+					type="button"
+					class="btn btn-circle btn-sm btn-error"
+					onclick={() => (deleteModal = true)}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						height="24px"
@@ -61,3 +74,7 @@
 		</div>
 	</div>
 </section>
+
+{#if deleteModal}
+	<DeleteReport id={weather.id} onClose={closeDeleteModal} />
+{/if}

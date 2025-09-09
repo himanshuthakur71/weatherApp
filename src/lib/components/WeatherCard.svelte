@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	let { weather } = $props();
 
 	// Convert UNIX timestamp to local time string
@@ -69,3 +70,6 @@
 		</div>
 	</div>
 </div>
+
+
+
