@@ -31,11 +31,11 @@
 
 	<div class=" flex w-full items-start justify-between">
 		<div>
-			<a href="/" class="btn btn-primary">View</a>
+			<a href="/dashboard/{weather.id}" class="btn btn-sm btn-primary">View</a>
 		</div>
 
-		<div>
-			<button aria-label="delete" type="button" class="btn btn-error">
+		<div class="flex gap-2">
+			<button aria-label="delete" type="button" class="btn btn-circle btn-sm btn-error">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -48,7 +48,7 @@
 				>
 			</button>
 
-			<button aria-label="download" type="button" class="btn btn-secondary">
+			<button aria-label="download" type="button" class="btn btn-circle btn-sm btn-secondary">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -61,7 +61,7 @@
 				>
 			</button>
 
-			<button aria-label="email" type="button" class="btn btn-secondary">
+			<button aria-label="email" type="button" class="btn btn-circle btn-sm btn-secondary">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
