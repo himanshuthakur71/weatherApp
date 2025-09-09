@@ -18,14 +18,14 @@
 
 <header class="relative w-full">
 	<div class="hms-container">
-		<div class="navbar">
+		<div class="navbar px-0">
 			<div class="navbar-start">
-				<a href="/" class="btn text-lg btn-ghost">WeatherApp</a>
+				<a href="/" class="text-lg font-semibold">WeatherApp</a>
 			</div>
 
 			<div class="navbar-end gap-4">
 				{#if theme == 'halloween'}
-					<div class=" relative" transition:fly={{y: -200, duration: 1000}}>
+					<div class=" relative" transition:fly={{ y: -200, duration: 1000 }}>
 						<figure
 							class=" absolute top-[-50px] right-[0px] z-[-1] flex h-[112px] w-[168px] rotate-[342deg] items-center justify-center"
 						>
