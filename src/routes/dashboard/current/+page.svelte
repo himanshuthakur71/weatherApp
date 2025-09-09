@@ -16,5 +16,9 @@
 				<WeatherCardSkeleton />
 			{/if}
 		</div>
+
+		<div class="mt-16 w-full">
+			<a href="/dashboard" class=" btn btn-block max-w-[120px] btn-primary lg:btn-lg">Back</a>
+		</div>
 	</div>
 </section>
