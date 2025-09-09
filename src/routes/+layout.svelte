@@ -30,6 +30,8 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>Weather App</title>
+	<meta name="description" content="Track, and email your weather anytime, anywhere.">
 </svelte:head>
 
 <div class="grid h-full min-h-[105vh] w-full grid-rows-[auto_1fr_auto]">
