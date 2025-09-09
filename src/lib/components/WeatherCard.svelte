@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+
 
 	let { weather } = $props();
 
@@ -18,19 +18,7 @@
 		return '🌤️';
 	};
 
-	let userTime = $state(new Date());
-
-	// Update user time every second
-	let interval: any;
-	onMount(() => {
-		interval = setInterval(() => {
-			userTime = new Date();
-		}, 1000);
-	});
-
-	onDestroy(() => {
-		clearInterval(interval);
-	});
+	
 </script>
 
 <div class="card mx-auto my-6 max-w-md bg-base-200 p-6 shadow-xl">
@@ -38,7 +26,6 @@
 		<div>
 			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
-			<p class="text-sm text-gray-500">Local Time: {userTime.toLocaleTimeString()}</p>
 		</div>
 		<div class="text-5xl">{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}</div>
 	</div>

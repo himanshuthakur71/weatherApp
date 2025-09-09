@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import CurrentTime from './CurrentTime.svelte';
 
 	const { user } = $derived(page.data);
 
@@ -13,7 +14,8 @@
 				<a href="/" class="btn text-lg btn-ghost">WeatherApp</a>
 			</div>
 
-			<div class="navbar-end">
+			<div class="navbar-end gap-4">
+				<p class="text-sm font-semibold"><CurrentTime /></p>
 				{#if user?.id}
 					<div class="dropdown dropdown-end">
 						<div tabindex="0" role="button" class="btn avatar btn-circle btn-ghost">
