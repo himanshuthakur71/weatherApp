@@ -25,9 +25,9 @@
 
 			<div class="w-full">
 				<ul class=" grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-					{#each weathers as weather}
+					{#each weathers as weather, index (weather.id)}
 						<li class=" shrink-0">
-							<SmallWeatherCard {weather} />
+							<SmallWeatherCard {weather} {index} />
 						</li>
 					{/each}
 				</ul>

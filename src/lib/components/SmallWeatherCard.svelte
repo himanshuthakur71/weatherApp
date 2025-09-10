@@ -3,8 +3,10 @@
 	import DeleteReport from '$lib/modals/DeleteReport.svelte';
 	import SendEmail from '$lib/modals/SendEmail.svelte';
 	import { countries } from '$lib/json/countries.json';
+	import { onMount } from 'svelte';
+	import { fly, scale } from 'svelte/transition';
 
-	let { weather }: { weather: any } = $props();
+	let { weather, index }: { weather: any; index: number } = $props();
 
 	// console.log(weather)
 
@@ -33,16 +35,24 @@
 	const closeEmailModal = () => {
 		emailModal = false;
 	};
+
+	let showCard = $state(false);
+
+	onMount(() => {
+		setTimeout(() => (showCard = true), (600 * index) / 2);
+	});
 </script>
 
-<div class=" w-full bg-base-200 p-4 shadow">
+{#if showCard}
+<div class=" w-full bg-base-200 p-4 shadow" in:scale>
 	<p class=" mb-1 badge !bg-white badge-sm">{formatDateTime(weather.created_at)}</p>
 	<div class="relative mb-4 flex items-center justify-between">
 		<div>
 			<h2 class="text-2xl font-bold">{weather.name}, {getCountryName(weather.sys.country)}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
 		</div>
-		<div class="absolute top-[-10px] right-[-10px] text-[40px]">
+
+		<div class="absolute top-[-10px] right-[-10px] text-[40px]" in:fly={{ y: -300, duration: 500 }}>
 			{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}
 		</div>
 	</div>
@@ -96,6 +106,9 @@
 		</div>
 	</div>
 </div>
+{/if}
+
+
 
 {#if deleteModal}
 	<DeleteReport id={weather.id} onClose={closeDeleteModal} />

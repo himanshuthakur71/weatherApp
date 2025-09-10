@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { formatDateTime } from '$lib/helpers/formatDate';
 	import { countries } from '$lib/json/countries.json';
+	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
 
 	let { weather } = $props();
 
@@ -22,6 +24,12 @@
 		if (main.includes('Storm')) return '⛈️';
 		return '🌤️';
 	};
+
+	let showWeatherIcon = $state(false);
+
+	onMount(() => {
+		setTimeout(() => (showWeatherIcon = true), 700);
+	});
 </script>
 
 <div class="w-full bg-base-200 p-6 shadow-xl">
@@ -33,11 +41,15 @@
 			<h2 class="text-2xl font-bold">{weather.name}, {getCountryName(weather.sys.country)}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
 		</div>
-		<div
-			class="absolute top-[-40px] right-[-30px] text-[60px] md:text-[160px] lg:top-[-140px] lg:right-[-100px]"
-		>
-			{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}
-		</div>
+
+		{#if showWeatherIcon}
+			<div
+				class="absolute top-[-40px] right-[-30px] text-[60px] md:text-[160px] lg:top-[-140px] lg:right-[-100px]"
+				in:fly={{ y: -300, duration: 500 }}
+			>
+				{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}
+			</div>
+		{/if}
 	</div>
 
 	<div class="mb-4">
