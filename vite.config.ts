@@ -12,7 +12,8 @@ export default defineConfig({
 				extends: './vite.config.ts',
 				test: {
 					name: 'client',
-					environment: 'browser',
+					// environment: 'browser',
+					environment: 'jsdom', // Use jsdom instead of browser
 					browser: {
 						enabled: true,
 						provider: 'playwright',
