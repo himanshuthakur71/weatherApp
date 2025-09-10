@@ -3,6 +3,7 @@
 	import { countries } from '$lib/json/countries.json';
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
+	import Map from './Map.svelte';
 
 	let { weather } = $props();
 
@@ -44,12 +45,16 @@
 
 		{#if showWeatherIcon}
 			<div
-				class="absolute top-[-40px] right-[-30px] text-[60px] md:text-[160px] lg:top-[-140px] lg:right-[-100px]"
+				class="absolute top-[-40px] right-[-30px] z-10 text-[60px] md:text-[160px] lg:top-[-140px] lg:right-[-100px]"
 				in:fly={{ y: -300, duration: 500 }}
 			>
 				{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}
 			</div>
 		{/if}
+	</div>
+
+	<div class="mb-4 h-full w-full">
+		<Map lat={weather.coord.lat} lng={weather.coord.lon} />
 	</div>
 
 	<div class="mb-4">

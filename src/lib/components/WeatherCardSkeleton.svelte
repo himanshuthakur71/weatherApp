@@ -6,6 +6,10 @@
 		
 	</div>
 
+	<div class="mb-4 h-[220px] skeleton w-full">
+
+	</div>
+
 	<div class="mb-4 h-[76px] skeleton w-full max-w-[180px] ">
 		
 	</div>
