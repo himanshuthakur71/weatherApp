@@ -18,20 +18,20 @@ export const load: PageLoad = async ({ fetch, parent }) => {
 
             // Fetch weather from server route
             const res = await fetch(`/api/weather?lat=${latitude}&lon=${longitude}`);
-            weatherData = await res.json();
+            let resWeather = await res.json();
 
-            if (weatherData) {
+            if (resWeather) {
 
                 const payload = {
                     user_id: user?.id || '',
-                    name: weatherData?.name || '',
-                    sys: weatherData?.sys || null,
-                    coord: weatherData?.coord || null,
-                    weather: weatherData?.weather || null,
-                    main: weatherData?.main || null,
-                    wind: weatherData?.wind || null,
-                    visibility: weatherData?.visibility || null,
-                    clouds: weatherData?.clouds || null,
+                    name: resWeather?.name || '',
+                    sys: resWeather?.sys || null,
+                    coord: resWeather?.coord || null,
+                    weather: resWeather?.weather || null,
+                    main: resWeather?.main || null,
+                    wind: resWeather?.wind || null,
+                    visibility: resWeather?.visibility || null,
+                    clouds: resWeather?.clouds || null,
                     auth_user_id: user?.id || '',
                 }
 
@@ -40,15 +40,17 @@ export const load: PageLoad = async ({ fetch, parent }) => {
                     .from('weathers')
                     .insert([
                         payload,
-                    ])
+                    ]).select().single();
+
+
+                weatherData = w_data
             }
+
+
 
         } catch (err) {
             console.error("Failed to get location or weather:", err);
         }
-    } else {
-        // Server-side fallback
-        weatherData = null; // or provide default lat/lon if you want
     }
 
     return {
