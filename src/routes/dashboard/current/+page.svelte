@@ -1,10 +1,48 @@
 <script lang="ts">
 	import WeatherCard from '$lib/components/WeatherCard.svelte';
 	import WeatherCardSkeleton from '$lib/components/WeatherCardSkeleton.svelte';
+	import { onMount } from 'svelte';
 	import type { PageProps } from './$types';
+	import { createEmailHTML } from '$lib/helpers/createEmailHtml';
 
 	let { data }: PageProps = $props();
 	const { user, weatherData } = $derived(data);
+
+	const sendReport = async () => {
+		try {
+			// Create email html
+			const emailHtml = createEmailHTML(weatherData, user);
+
+			if (emailHtml) {
+				const emailRes = await fetch('/api/send-email', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						to: user?.email,
+						subject: 'New Weather Report',
+						text: emailHtml
+					})
+				});
+
+				const emailResult = await emailRes.json();
+
+				if ((emailResult.message = 'Email sent successfully!')) {
+					// Toast or something if want
+				} else {
+					alert(`❌ Error: ${emailResult.error}`);
+				}
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	onMount(() => {
+		// send email
+		sendReport();
+	});
 </script>
 
 <section>

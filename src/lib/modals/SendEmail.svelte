@@ -9,7 +9,7 @@
 
 	let sending = $state(false);
 
-	const sendHealthReport = async () => {
+	const sendReport = async () => {
 		sending = true;
 		try {
 			// Create email html
@@ -103,7 +103,7 @@
 		</div>
 
 		<div class="mt-[54px] w-full">
-			<button onclick="{sendHealthReport}" disabled={sending} type="button" class=" btn btn-wide max-w-[160px] btn-lg btn-secondary">
+			<button onclick="{sendReport}" disabled={sending} type="button" class=" btn btn-wide max-w-[160px] btn-lg btn-secondary">
 				{#if sending}
 					<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
 						><path
