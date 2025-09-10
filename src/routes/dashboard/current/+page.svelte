@@ -4,12 +4,20 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-	const { weatherData } = $derived(data);
+	const { user, weatherData } = $derived(data);
 </script>
 
 <section>
 	<div class="hms-container">
-		<div class="w-full my-16">
+		<div class="my-16 w-full">
+			<div class=" mb-6">
+				<h1 class=" text-3xl">
+					Hello, <span class=" text-primary"
+						>{user?.user_metadata?.first_name} {user?.user_metadata?.last_name}</span
+					>
+				</h1>
+				<p class=" mt-2 text-lg">Track your weather below.</p>
+			</div>
 			{#if weatherData}
 				<WeatherCard weather={weatherData} />
 			{:else}

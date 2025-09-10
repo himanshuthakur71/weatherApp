@@ -19,6 +19,8 @@
 					>
 				</h1>
 				<p class=" mt-2 text-lg">Track, and email your weather history below.</p>
+
+				<a href="/dashboard/current" class="btn mt-4 btn-success">Check Current Weather</a>
 			</div>
 
 			<div class="w-full">
