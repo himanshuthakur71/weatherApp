@@ -11,6 +11,7 @@ export const load: PageServerLoad = async ({ depends, locals: { supabase } }) =>
         let { data: weathers, error } = await supabase
             .from('weathers')
             .select('*')
+            .order("created_at", { ascending: false }) // newest first
 
             return weathers || []
     }

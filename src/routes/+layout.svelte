@@ -6,9 +6,24 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { initTheme } from '$lib/helpers/theme';
+	import NProgress from 'nprogress';
+	import 'nprogress/nprogress.css';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
 	let { data, children } = $props();
 	let { session, supabase } = $derived(data);
+
+	NProgress.configure({ minimum: 0.16, showSpinner: true });
+
+	$effect(() => {
+		beforeNavigate(async () => {
+			NProgress.start();
+		});
+
+		afterNavigate(async () => {
+			NProgress.done();
+		});
+	});
 
 	let cleanup: (() => void) | undefined | null = null;
 
@@ -31,7 +46,7 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<title>Weather App</title>
-	<meta name="description" content="Track, and email your weather anytime, anywhere.">
+	<meta name="description" content="Track, and email your weather anytime, anywhere." />
 </svelte:head>
 
 <div class="grid h-full min-h-[105vh] w-full grid-rows-[auto_1fr_auto]">
