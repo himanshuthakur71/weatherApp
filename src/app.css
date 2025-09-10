@@ -11,7 +11,7 @@
     @apply w-full max-w-[1210px] px-[20px] mx-auto;
 }
 
-.leaflet-pane.leaflet-marker-pane img[src="marker-shadow.png"],
+.leaflet-pane.leaflet-shadow-pane img[src="marker-shadow.png"],
 .leaflet-pane.leaflet-marker-pane img[src="marker-icon.png"]{
     display: none !important;
 }
