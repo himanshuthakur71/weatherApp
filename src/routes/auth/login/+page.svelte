@@ -82,12 +82,6 @@
 								</button>
 							</label>
 
-							<div class=" text-right">
-								<a href="/" class=" font-semibold text-secondary hover:underline"
-									>Forgot password?</a
-								>
-							</div>
-
 							{#if form?.error}
 								<div role="alert" class="alert-soft alert alert-error">
 									<span>{form?.error}.</span>
