@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { formatDateTime } from '$lib/helpers/formatDate';
 	import DeleteReport from '$lib/modals/DeleteReport.svelte';
 	import SendEmail from '$lib/modals/SendEmail.svelte';
 
 	let { weather }: { weather: any } = $props();
+
+
+	// console.log(weather)
 
 	const getWeatherIcon = (main: string, sunset: number) => {
 		const now = Date.now() / 1000;
@@ -27,7 +31,8 @@
 	};
 </script>
 
-<div class=" w-full bg-base-200 p-4 shadow-xl">
+<div class=" w-full bg-base-200 p-4 shadow">
+		<p class=" badge !bg-white badge-sm mb-1">{formatDateTime(weather.created_at)}</p>
 	<div class="relative mb-4 flex items-center justify-between">
 		<div>
 			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
