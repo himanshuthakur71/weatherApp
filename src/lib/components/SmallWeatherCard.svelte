@@ -2,11 +2,15 @@
 	import { formatDateTime } from '$lib/helpers/formatDate';
 	import DeleteReport from '$lib/modals/DeleteReport.svelte';
 	import SendEmail from '$lib/modals/SendEmail.svelte';
+	import { countries } from '$lib/json/countries.json';
 
 	let { weather }: { weather: any } = $props();
 
-
 	// console.log(weather)
+
+	const getCountryName = (code: string): string => {
+		return countries.find((country) => country.code === code)?.name ?? code;
+	};
 
 	const getWeatherIcon = (main: string, sunset: number) => {
 		const now = Date.now() / 1000;
@@ -32,10 +36,10 @@
 </script>
 
 <div class=" w-full bg-base-200 p-4 shadow">
-		<p class=" badge !bg-white badge-sm mb-1">{formatDateTime(weather.created_at)}</p>
+	<p class=" mb-1 badge !bg-white badge-sm">{formatDateTime(weather.created_at)}</p>
 	<div class="relative mb-4 flex items-center justify-between">
 		<div>
-			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
+			<h2 class="text-2xl font-bold">{weather.name}, {getCountryName(weather.sys.country)}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
 		</div>
 		<div class="absolute top-[-10px] right-[-10px] text-[40px]">

@@ -1,10 +1,16 @@
 <script lang="ts">
+	import { formatDateTime } from '$lib/helpers/formatDate';
+	import { countries } from '$lib/json/countries.json';
 
 	let { weather } = $props();
 
 	// Convert UNIX timestamp to local time string
 	const formatTime = (ts: number) =>
 		new Date(ts * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+	const getCountryName = (code: string): string => {
+		return countries.find((country) => country.code === code)?.name ?? code;
+	};
 
 	// Determine icon for day/night
 	const getWeatherIcon = (main: string, sunset: number) => {
@@ -19,12 +25,17 @@
 </script>
 
 <div class="w-full bg-base-200 p-6 shadow-xl">
+	{#if weather?.created_at}
+		<p class=" mb-1 badge !bg-white badge-sm">{formatDateTime(weather.created_at)}</p>
+	{/if}
 	<div class="relative mb-4 flex items-center justify-between">
 		<div>
-			<h2 class="text-2xl font-bold">{weather.name}, {weather.sys.country}</h2>
+			<h2 class="text-2xl font-bold">{weather.name}, {getCountryName(weather.sys.country)}</h2>
 			<p class="text-sm text-gray-500">Lat: {weather.coord.lat} | Lon: {weather.coord.lon}</p>
 		</div>
-		<div class="absolute top-[-40px]  right-[-30px] lg:top-[-140px] lg:right-[-100px] text-[60px] md:text-[160px]">
+		<div
+			class="absolute top-[-40px] right-[-30px] text-[60px] md:text-[160px] lg:top-[-140px] lg:right-[-100px]"
+		>
 			{getWeatherIcon(weather.weather[0].main, weather.sys.sunset)}
 		</div>
 	</div>
@@ -70,6 +81,3 @@
 		</div>
 	</div>
 </div>
-
-
-
