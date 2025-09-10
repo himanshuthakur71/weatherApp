@@ -39,7 +39,7 @@
 						</figure>
 					</div>
 				{/if}
-				<p class="w-[80px] md:w-[76px] text-sm font-semibold"><CurrentTime /></p>
+				<p class="w-[80px] text-sm font-semibold"><CurrentTime /></p>
 				{#if user?.id}
 					<div class="dropdown dropdown-end">
 						<div tabindex="0" role="button" class="btn avatar btn-circle btn-ghost">
